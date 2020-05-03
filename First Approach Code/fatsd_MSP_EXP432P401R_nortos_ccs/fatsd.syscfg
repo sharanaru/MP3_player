@@ -1,0 +1,85 @@
+// These arguments were used when this file was generated. They will be automatically applied on subsequent loads 
+// via the GUI or CLI invocations. Run CLI with '--help' for additional information on how to override these arguments.
+// @cliArgs --board "/ti/boards/MSP_EXP432P401R" --product "simplelink_msp432p4_sdk@3.30.00.13"
+// @versions {"data":"2019051709","timestamp":"2019051709","tool":"1.1.792","templates":"2019051709"}
+
+// Add a BOOSTXL-SHARP128 boosterpack
+var BOOSTXL_SHARP128 = scripting.addHardware("/ti/boards/boosterpacks/BOOSTXL-SHARP128");
+var RTOS = scripting.addModule("/ti/drivers/RTOS");
+var Display = scripting.addModule("/ti/display/Display");
+var Display1 = Display.addInstance();
+var GPIO = scripting.addModule("/ti/drivers/GPIO");
+var GPIO1 = GPIO.addInstance();
+var SD = scripting.addModule("/ti/drivers/SD");
+var SD1 = SD.addInstance();
+// name - Select the RTOS being used
+RTOS.name = "NoRTOS";
+// Name
+RTOS.timer0.resource.$name = "MyTIMER_A1";
+// Name - The C/C++ identifier used in applications as the index parameter passed to Display runtime APIs
+Display1.$name = "CONFIG_Display_0";
+// Use Hardware - Select the hardware to use, or 'none' to use available header pins
+Display1.$hardware = system.deviceData.board.components.XDS110UART;
+var Board = scripting.addModule("/ti/drivers/Board");
+var DriverLib = scripting.addModule("/ti/devices/DriverLib");
+// Name - The C/C++ identifier used in applications as the index parameter passed to UART runtime APIs
+Display1.uart.$name = "CONFIG_UART_0";
+var Power = scripting.addModule("/ti/drivers/Power");
+// Name
+Power.performanceLevel3.$name = "ti_drivers_power_PowerMSP432PerfLevels0";
+// Name
+Power.performanceLevel2.$name = "ti_drivers_power_PowerMSP432PerfLevels1";
+// Name
+Power.performanceLevel1.$name = "ti_drivers_power_PowerMSP432PerfLevels2";
+// Name
+Power.performanceLevel0.$name = "ti_drivers_power_PowerMSP432PerfLevels3";
+// Name
+Display1.uart.uart.$name = "MyUART1";
+// Use Hardware - Select the hardware to use, or 'none' to use available header pins
+GPIO1.$hardware = system.deviceData.board.components.LED1_RED;
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+GPIO1.$name = "CONFIG_GPIO_LED_0";
+// Use FatFS - Enables the driver to use the SDFatFS driver interface
+SD1.useFatFS = true;
+// Name - The C/C++ identifier used in applications as the index parameter passed to SD runtime APIs
+SD1.$name = "CONFIG_SDFatFS_0";
+// Use Hardware - Select the hardware to use, or 'none' to use available header pins
+SD1.$hardware = BOOSTXL_SHARP128.components.SD_CARD;
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+SD1.slaveSelect.$name = "CONFIG_GPIO_0";
+// Mode - Select the GPIO mode
+SD1.slaveSelect.mode = "Output";
+// Callback Function - The name of the callback function called when this GPIO pin triggers an interrupt, or 'NULL' if it's specified at runtime
+SD1.slaveSelect.callbackFunction = "";
+var SPI1 = SD1.spiInstance; // Create reference
+// Name - The C/C++ identifier used in applications as the index parameter passed to SPI runtime APIs
+SPI1.$name = "CONFIG_SPI_0";
+var DMA = scripting.addModule("/ti/drivers/DMA");
+// Name
+SPI1.spi.$name = "MySPI1";
+// Suggest solution
+RTOS.timer0.resource.$suggestSolution = "Timer_A0";
+// Suggest solution
+Display1.uart.uart.$suggestSolution = "EUSCI_A0";
+// Suggest solution
+Display1.uart.uart.txPin.$suggestSolution = "7";
+// Suggest solution
+Display1.uart.uart.rxPin.$suggestSolution = "6";
+// Suggest solution
+GPIO1.gpioPin.$suggestSolution = "4";
+// Suggest solution
+SD1.slaveSelect.gpioPin.$suggestSolution = "62";
+// Suggest solution
+SPI1.spi.$suggestSolution = "EUSCI_B0";
+// Suggest solution
+SPI1.spi.sclkPin.$suggestSolution = "9";
+// Suggest solution
+SPI1.spi.misoPin.$suggestSolution = "11";
+// Suggest solution
+SPI1.spi.mosiPin.$suggestSolution = "10";
+// Suggest solution
+SPI1.spi.dmaRxChannel.$suggestSolution = "DMA_CH1";
+// Suggest solution
+SPI1.spi.dmaTxChannel.$suggestSolution = "DMA_CH0";
+// Suggest solution
+SPI1.spi.dmaInterruptNumber.$suggestSolution = "DMA_INT0";
